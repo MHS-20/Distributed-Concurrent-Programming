@@ -1,64 +1,57 @@
 package pcd.lab08.actors.step3_multiple_behav;
+
 import akka.actor.*;
+
 import static pcd.lab08.actors.step3_multiple_behav.MsgProtocol.*;
 
 public class ActorWithBehaviours extends AbstractActor {
 
-	private int state;
-	
-	/* Base behaviour */
-	
-	public ActorWithBehaviours() {
-		state = 0;
-	}
-	
-	@Override
-	public Receive createReceive() {
-		return receiveBuilder()
-				.match(MsgZero.class,this::onMsgZero)
-				.build();
-	}
+    private int state;
 
-	private void onMsgZero(MsgZero msg) {
-		log("msgZero - state: " + state);
-		state++;
-		this.getContext().become(receiverBehaviourA());
-	}
+    /* Base behaviour */
+    public ActorWithBehaviours() {
+        state = 0;
+    }
 
+    @Override
+    public Receive createReceive() {
+        return receiveBuilder()
+                .match(MsgZero.class, this::onMsgZero)
+                .build();
+    }
 
-	/* Behaviour A */
+    private void onMsgZero(MsgZero msg) {
+        log("msgZero - state: " + state);
+        state++;
+        this.getContext().become(receiverBehaviourA());
+    }
 
-	public Receive receiverBehaviourA() {
-		return receiveBuilder()
-				.match(MsgOne.class,this::onMsgOne)
-				.build();
-	}
-	
-	private void onMsgOne(MsgOne msg) {
-		log("msgOne - state: " + state);	
-		state++;
+    /* Behaviour A */
+    public Receive receiverBehaviourA() {
+        return receiveBuilder()
+                .match(MsgOne.class, this::onMsgOne)
+                .build();
+    }
 
-		this.getContext().become(receiverBehaviourB());
-	}
-	
-	/* Behaviour B */
-	
-	public Receive receiverBehaviourB() {
-		return receiveBuilder()
-				.match(MsgTwo.class,this::onMsgTwo)
-				.build();
-	}
+    private void onMsgOne(MsgOne msg) {
+        log("msgOne - state: " + state);
+        state++;
+        this.getContext().become(receiverBehaviourB());
+    }
 
-	private void onMsgTwo(MsgTwo msg) {
-		log("msgTwo - state: " + state);		
-		this.getContext().stop(this.getSelf());
-	}
+    /* Behaviour B */
+    public Receive receiverBehaviourB() {
+        return receiveBuilder()
+                .match(MsgTwo.class, this::onMsgTwo)
+                .build();
+    }
 
+    private void onMsgTwo(MsgTwo msg) {
+        log("msgTwo - state: " + state);
+        this.getContext().stop(this.getSelf());
+    }
 
-	private void log(String msg) {
-		System.out.println("[ActorWithBehaviour] " + msg);
-	}
-
-
-	
+    private void log(String msg) {
+        System.out.println("[ActorWithBehaviour] " + msg);
+    }
 }

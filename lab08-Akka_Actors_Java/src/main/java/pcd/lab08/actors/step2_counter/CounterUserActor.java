@@ -10,7 +10,7 @@ public class CounterUserActor extends AbstractActor {
 		return receiveBuilder()
 				.match(CounterUserMsg.class, this::onStartMsg)
 				.match(CounterValueMsg.class, this::onCounterValueMsg)
-				.build();		
+				.build();
 	}
 
 	private void onStartMsg(CounterUserMsg msg) {

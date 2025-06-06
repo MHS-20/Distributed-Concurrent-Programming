@@ -8,24 +8,21 @@ public class RunActorWithMultipleBehavioursAndStashing {
 	  final ActorSystem system = ActorSystem.create("myActorSystem");		
 	  final ActorRef myActor =  system.actorOf(Props.create(ActorWithBehavioursAndStashing.class), "myActor");
 
-
 	  /* 
 	   * The following two msgs are not handled in the initial behaviour.
-	   * However they are not lost, they are stashed
-	   *  
+	   * However, they are not lost, they are stashed
 	   */	  
 	  myActor.tell(new MsgProtocol.MsgOne(), null);  
 	  myActor.tell(new MsgProtocol.MsgTwo(), null);  
 	  
-	  /* Give time to the logging system to setup */
+	  /* Give time to the logging system to set up */
 	  Thread.sleep(1000);
 
 	  /* 
 	   * The next msg will cause a transition to the new behaviour, 
 	   * where the stashed msgs will be unstashed and processed.  
 	   */
-	  myActor.tell(new MsgProtocol.MsgZero(), null); 
-  
+	  myActor.tell(new MsgProtocol.MsgZero(), null);
 	  System.out.println("done");
   }
 }

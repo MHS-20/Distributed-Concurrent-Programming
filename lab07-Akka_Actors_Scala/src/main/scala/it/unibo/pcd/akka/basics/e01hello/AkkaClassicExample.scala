@@ -13,7 +13,9 @@ object MyActor:
   def apply(tag: String): MyActor = new MyActor(tag) // factory method
 
 def inContextOf(actor: ActorRef)(block: ActorRef ?=> Unit): Unit = // using clause
+
   given ActorRef = actor
+
   block
 @main def main(): Unit =
   val system = akka.actor.ActorSystem("factory") // factory for actors

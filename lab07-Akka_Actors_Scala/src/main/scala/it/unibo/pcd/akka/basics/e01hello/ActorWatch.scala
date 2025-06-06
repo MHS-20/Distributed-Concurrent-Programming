@@ -20,6 +20,7 @@ object Root:
         case (_, Terminated(_)) =>
           context.log.info("Child terminated")
           Behaviors.stopped
+
 @main def killExample() =
   val system = ActorSystem(Root(), "Root")
   system ! "kill"

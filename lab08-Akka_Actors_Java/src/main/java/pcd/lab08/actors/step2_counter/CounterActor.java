@@ -6,7 +6,7 @@ import static pcd.lab08.actors.step2_counter.CounterMsgProtocol.*;
 public class CounterActor extends AbstractActor {
 
 	private int count;
-	
+
 	private CounterActor() {
 		count = 0;
 	}
@@ -25,5 +25,4 @@ public class CounterActor extends AbstractActor {
 	private void onGetValueMsg(GetValueMsg msg) {
 		msg.replyTo().tell(new CounterValueMsg(count), this.getSelf());
 	}
-	
 }

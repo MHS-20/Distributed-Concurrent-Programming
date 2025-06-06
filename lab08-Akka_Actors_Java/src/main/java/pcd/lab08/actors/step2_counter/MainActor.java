@@ -19,6 +19,5 @@ public class MainActor extends AbstractActor {
 	}
 
 	/* types of messages */
-	
 	static public final class BootMsg {}
 }

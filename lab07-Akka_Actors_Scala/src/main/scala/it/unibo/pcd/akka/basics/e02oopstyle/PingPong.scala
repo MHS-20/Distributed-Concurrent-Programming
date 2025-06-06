@@ -34,9 +34,9 @@ object PingPongMainSimple extends App:
   system ! Ping(system)
 
 /** Concepts:
-  *   - actor hierarchy
-  *   - watching children for termination (through signals)
-  */
+ *   - actor hierarchy
+ *   - watching children for termination (through signals)
+ */
 object PingPongMain extends App:
   val system = ActorSystem(
     Behaviors.setup[PingPong]: ctx =>
@@ -50,7 +50,7 @@ object PingPongMain extends App:
           pingponger ! msg
           Behaviors.same
         }
-        .receiveSignal { case (ctx, t @ Terminated(_)) =>
+        .receiveSignal { case (ctx, t@Terminated(_)) =>
           ctx.log.info("PingPonger terminated. Shutting down")
           Behaviors.stopped // Or Behaviors.same to continue
         }

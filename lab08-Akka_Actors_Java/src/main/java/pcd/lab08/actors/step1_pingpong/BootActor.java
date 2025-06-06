@@ -16,10 +16,9 @@ public class BootActor extends AbstractActor {
 	private void onBootMsg(BootMsg msg) {
 		ActorRef pinger = this.getContext().actorOf(Props.create(PingerActor.class), "pinger");
 		ActorRef ponger = this.getContext().actorOf(Props.create(PongerActor.class), "ponger");
-		pinger.tell(new pcd.lab08.actors.step1_pingpong.PingerPongerProtocol.BootMsg(ponger), this.getSelf());
+		pinger.tell(new PingerPongerProtocol.BootMsg(ponger), this.getSelf());
 	}
 
 	/* messages */
-	
 	static public class BootMsg {}
 }

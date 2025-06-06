@@ -100,7 +100,7 @@
           <version>3.12.1</version>
         </plugin>
         <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <artifactId>maven-project-info-reportsa-plugin</artifactId>
           <version>3.6.1</version>
         </plugin> -->
       </plugins>

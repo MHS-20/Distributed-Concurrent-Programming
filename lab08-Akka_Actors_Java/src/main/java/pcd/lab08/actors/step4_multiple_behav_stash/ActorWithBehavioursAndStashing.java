@@ -3,11 +3,9 @@ import akka.actor.AbstractActorWithStash;
 
 
 public class ActorWithBehavioursAndStashing extends AbstractActorWithStash {
-
 	private int state;
 	
 	/* Base behaviour */
-	
 	public ActorWithBehavioursAndStashing() {
 		state = 0;
 	}
@@ -28,9 +26,7 @@ public class ActorWithBehavioursAndStashing extends AbstractActorWithStash {
 		this.getContext().become(receiverBehaviourA());
 	}
 
-
 	/* Behaviour A */
-
 	public Receive receiverBehaviourA() {
 		return receiveBuilder()
 				.match(MsgProtocol.MsgOne.class,this::onMsgOne)
@@ -46,7 +42,6 @@ public class ActorWithBehavioursAndStashing extends AbstractActorWithStash {
 	}
 	
 	/* Behaviour B */
-	
 	public Receive receiverBehaviourB() {
 		return receiveBuilder()
 				.match(MsgProtocol.MsgTwo.class,this::onMsgTwo)
@@ -58,11 +53,7 @@ public class ActorWithBehavioursAndStashing extends AbstractActorWithStash {
 		this.getContext().stop(this.getSelf());
 	}
 
-
 	private void log(String msg) {
 		System.out.println("[ActorWithBehaviour] " + msg);
 	}
-
-
-	
 }

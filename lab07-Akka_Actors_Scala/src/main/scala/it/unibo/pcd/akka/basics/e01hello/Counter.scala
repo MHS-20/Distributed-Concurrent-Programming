@@ -8,7 +8,9 @@ import Counter.*
 object Counter:
   enum Command: // APIs i.e. message that actors should received / send
     case Tick
+
   export Command.*
+
   def apply(from: Int, to: Int): Behavior[Command] =
     Behaviors.receive: (context, msg) =>
       msg match
@@ -22,7 +24,7 @@ object Counter:
     Behaviors.setup(new Counter(_, 0, to))
 
 class Counter(context: ActorContext[Counter.Command], var from: Int, val to: Int)
-    extends AbstractBehavior[Counter.Command](context):
+  extends AbstractBehavior[Counter.Command](context):
   override def onMessage(msg: Counter.Command): Behavior[Counter.Command] = msg match
     case Tick if from != to =>
       context.log.info(s"Count: $from")
