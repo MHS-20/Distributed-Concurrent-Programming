@@ -19,7 +19,8 @@ public class RunClientSide {
             log("count value " + value);
                         
             var l = new MyCounterListenerImpl();
-            c.addListener(l);
+            var proxy = (RemoteCounterListener) UnicastRemoteObject.exportObject(l, 0);
+            c.addListener(proxy);
             
             c.inc();
             
